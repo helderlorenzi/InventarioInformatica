@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Roteadores AP Wifi</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+<style>
+div.panel-body {
+	overflow: auto;
+	white-space: nowrap;
+}
+
+div.panel-body td {
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+		<div class="panel panel-default" style="margin: 10px">
+
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de Roteadores AP Wifi</h1>
+			</div>
+
+
+
+			<div class="panel-body">
+
+				<form class="form-inline" method="POST"
+					th:object="${roteadorApWifi}" th:action="@{/roteadoresApWifi}"
+					style="margin: 20px 0">
+					<div class="form-group">
+
+						<table class="scrollmenu">
+							<tr>
+								<td>Patrimônio</td>
+								<td><input type="text" class="form-control"
+									placeholder="Patrimonio" th:field="*{patrimonio}" /></td>
+							</tr>
+							<tr>
+								<td><a th:href="@{'/marcas'}">Marca</a></td>
+								<td><input type="text" list="marcs" class="form-control"
+									placeholder="Marca" th:field="*{marca}" /> <datalist
+										id="marcs">
+										<option th:each="marca : ${marcas}" th:text="${marca.nome}"
+											th:value="${marca.id}" />
+									</datalist></td>
+							</tr>
+
+							<tr>
+								<td><a th:href="@{'/modelos'}">Modelo</a></td>
+								<td><input type="text" list="mods" class="form-control"
+									placeholder="Modelo" th:field="*{modelo}" /> <datalist
+										id="mods">
+										<option th:each="modelo : ${modelos}" th:text="${modelo.nome}"
+											th:value="${modelo.id}" />
+									</datalist></td>
+							</tr>
+							<tr>
+								<td>Número de Série</td>
+								<td><input type="text" class="form-control"
+									placeholder="Número de Série" th:field="*{numeroDeSerie}" /></td>
+							</tr>
+							<tr>
+								<td><a th:href="@{'/departamentos'}">Departamento</a></td>
+								<td><input type="text" list="locs" class="form-control"
+									placeholder="Departamento" th:field="*{localizacao}" /> <datalist
+										id="locs">
+										<option th:each="localizacao : ${localizacoes}"
+											th:text="${localizacao.nome}" th:value="${localizacao.id}" />
+									</datalist></td>
+							</tr>
+							<tr>
+								<td>Observação</td>
+								<td><input type="text" class="form-control"
+									placeholder="Observação" th:field="*{observacao}" /></td>
+							</tr>
+
+							<tr>
+								<td>Nome Ap</td>
+								<td><input type="text" class="form-control"
+									placeholder="Nome Ap" th:field="*{nomeAp}" /></td>
+							</tr>
+							<tr>
+								<td>Endereço Mac</td>
+								<td><input type="text" class="form-control"
+									placeholder="Endereço Mac" th:field="*{enderecoMac}" /></td>
+							</tr>
+							<tr>
+								<td>Ip Wan</td>
+								<td><input type="text" class="form-control"
+									placeholder="Ip Wan" th:field="*{ipWan}" /></td>
+							</tr>
+							<tr>
+								<td>Mascara</td>
+								<td><input type="text" class="form-control"
+									placeholder="Mascara" th:field="*{mascara}" /></td>
+							</tr>
+							<tr>
+								<td>Gateway</td>
+								<td><input type="text" class="form-control"
+									placeholder="Gateway" th:field="*{gateway}" /></td>
+							</tr>
+							<tr>
+								<td>Dns Primário</td>
+								<td><input type="text" class="form-control"
+									placeholder="Dns Primário" th:field="*{dnsPrimario}" /></td>
+							</tr>
+							<tr>
+								<td>Dns Secundário</td>
+								<td><input type="text" class="form-control"
+									placeholder="Dns Secundário" th:field="*{dnsSecundario}" /></td>
+							</tr>
+							<tr>
+								<td>Ip Lan Atual</td>
+								<td><input type="text" class="form-control"
+									placeholder="Ip Lan Atual" th:field="*{ipLanAtual}" /></td>
+							</tr>
+							<tr>
+								<td>Ip Lan Antigo</td>
+								<td><input type="text" class="form-control"
+									placeholder="Ip Lan Antigo" th:field="*{ipLanAntigo}" /></td>
+							</tr>
+							<tr>
+								<td>Mascara Lan</td>
+								<td><input type="text" class="form-control"
+									placeholder="Mascara Lan" th:field="*{mascaraLan}" /></td>
+							</tr>
+							<tr>
+								<td>Gateway Lan</td>
+								<td><input type="text" class="form-control"
+									placeholder="Gateway Lan" th:field="*{gatewayLan}" /></td>
+							</tr>
+							<tr>
+								<td>Dns Primário Lan</td>
+								<td><input type="text" class="form-control"
+									placeholder="Dns Primário Lan" th:field="*{dnsPrimarioLan}" /></td>
+							</tr>
+							<tr>
+								<td>Dns Secundário Lan</td>
+								<td><input type="text" class="form-control"
+									placeholder="Dns Secundário Lan" th:field="*{dnsSecundarioLan}" /></td>
+							</tr>
+							<tr>
+								<td>Usuário</td>
+								<td><input type="text" class="form-control"
+									placeholder="Usuário" th:field="*{usuario}" /></td>
+							</tr>
+							<tr>
+								<td>Senha</td>
+								<td><input type="text" class="form-control"
+									placeholder="Senha" th:field="*{senha}" /></td>
+							</tr>
+							<tr>
+								<td>Range Ip Disp DHCP</td>
+								<td><input type="text" class="form-control"
+									placeholder="Range Ip Disp DHCP" th:field="*{rangeIpDispDhcp}" /></td>
+							</tr>
+							<tr>
+								<td>SSID</td>
+								<td><input type="text" class="form-control"
+									placeholder="SSID" th:field="*{ssid}" /></td>
+							</tr>
+							<tr>
+								<td>Senha SSID</td>
+								<td><input type="text" class="form-control"
+									placeholder="Senha SSID" th:field="*{senhaSsid}" /></td>
+							</tr>
+							<tr>
+								<td>Modo Operação</td>
+								<td><input type="text" class="form-control"
+									placeholder="Modo Operação" th:field="*{modoOperacao}" /></td>
+							</tr>
+							<tr>
+								<td>Canal Wireless</td>
+								<td><input type="text" class="form-control"
+									placeholder="Canal Wireless" th:field="*{canalWireless}" /></td>
+							</tr>
+							<tr>
+								<td>Lease Time</td>
+								<td><input type="text" class="form-control"
+									placeholder="Lease Time" th:field="*{leaseTime}" /></td>
+							</tr>
+
+
+						</table>
+
+						<button type="submit" class="btn btn-primary">Adicionar</button>
+
+					</div>
+				</form>
+
+				<table class="table" border="1">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Patrimonio</th>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Número de Série</th>
+							<th>Departamento</th>
+
+							<th>Observação</th>
+							<th>Atualizado Em</th>
+
+							<th>Nome Ap</th>
+							<th>Endereço Mac</th>
+							<th>Ip Wan</th>
+							<th>Mascara</th>
+							<th>Gateway</th>
+							<th>Dns Primário</th>
+							<th>Dns Secundário</th>
+							<th>Ip Lan Atual</th>
+							<th>Ip Lan Antigo</th>
+							<th>Mascara Lan</th>
+							<th>Gateway Lan</th>
+							<th>Dns Primário Lan</th>
+							<th>Dns Secundário Lan</th>
+							<th>Usuário</th>
+							<th>Senha</th>
+							<th>Range Ip Disp DHCP</th>
+							<th>SSID</th>
+							<th>Senha SSID</th>
+							<th>Modo Operação</th>
+							<th>Canal Wireless</th>
+							<th>Lease Time</th>
+
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="roteadorApWifi : ${roteadoresApWifi}">
+							<td th:text="${roteadorApWifi.id}"></td>
+							<td th:text="${roteadorApWifi.patrimonio}"></td>
+							<td th:text="${roteadorApWifi.marca}"></td>
+							<td th:text="${roteadorApWifi.modelo}"></td>
+							<td th:text="${roteadorApWifi.numeroDeSerie}"></td>
+							<td th:text="${roteadorApWifi.localizacao}"></td>
+
+							<td th:text="${roteadorApWifi.observacao}"></td>
+							<td th:date="${roteadorApWifi.atualizadoEm}"></td>
+
+							<td th:date="${nomeAp}"></td>
+							<td th:date="${enderecoMac}"></td>
+							<td th:date="${ipWan}"></td>
+							<td th:date="${mascara}"></td>
+							<td th:date="${gateway}"></td>
+							<td th:date="${dnsPrimario}"></td>
+							<td th:date="${dnsSecundario}"></td>
+							<td th:date="${ipLanAtual}"></td>
+							<td th:date="${ipLanAntigo}"></td>
+							<td th:date="${mascaraLan}"></td>
+							<td th:date="${gatewayLan}"></td>
+							<td th:date="${dnsPrimarioLan}"></td>
+							<td th:date="${dnsSecundarioLan}"></td>
+							<td th:date="${usuario}"></td>
+							<td th:date="${senha}"></td>
+							<td th:date="${rangeIpDispDhcp}"></td>
+							<td th:date="${ssid}"></td>
+							<td th:date="${senhaSsid}"></td>
+							<td th:date="${modoOperacao}"></td>
+							<td th:date="${canalWireless}"></td>
+							<td th:date="${leaseTime}"></td>
+
+							<td><a
+								th:href="@{'/roteadoresApWifi/populaForm'(id=${roteadorApWifi.id})}">editar</a></td>
+							<td><a
+								th:href="@{'/roteadoresApWifi/remove'(id=${roteadorApWifi.id})}">remover</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="rodape :: rodape">...</div>
+
+</body>
+</html>

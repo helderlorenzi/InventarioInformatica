@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Switchs</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+<style>
+div.panel-body {
+	overflow: auto;
+	white-space: nowrap;
+}
+
+div.panel-body td {
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+		<div class="panel panel-default" style="margin: 10px">
+
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de Switchs</h1>
+			</div>
+
+
+
+			<div class="panel-body">
+
+				<form class="form-inline" method="POST" th:object="${switcher}"
+					th:action="@{/switchs}" style="margin: 20px 0">
+					<div class="form-group">
+
+						<table class="scrollmenu">
+							<tr>
+								<td>Patrimônio</td>
+								<td><input type="text" class="form-control"
+									placeholder="Patrimonio" th:field="*{patrimonio}" /></td>
+							</tr>
+							<tr>
+								<td><a th:href="@{'/marcas'}">Marca</a></td>
+								<td><input type="text" list="marcs" class="form-control"
+									placeholder="Marca" th:field="*{marca}" /> <datalist
+										id="marcs">
+										<option th:each="marca : ${marcas}" th:text="${marca.nome}"
+											th:value="${marca.id}" />
+									</datalist></td>
+							</tr>
+
+							<tr>
+								<td><a th:href="@{'/modelos'}">Modelo</a></td>
+								<td><input type="text" list="mods" class="form-control"
+									placeholder="Modelo" th:field="*{modelo}" /> <datalist
+										id="mods">
+										<option th:each="modelo : ${modelos}" th:text="${modelo.nome}"
+											th:value="${modelo.id}" />
+									</datalist></td>
+							</tr>
+							<tr>
+								<td>Número de Série</td>
+								<td><input type="text" class="form-control"
+									placeholder="Número de Série" th:field="*{numeroDeSerie}" /></td>
+							</tr>
+							<tr>
+								<td><a th:href="@{'/departamentos'}">Departamento</a></td>
+								<td><input type="text" list="locs" class="form-control"
+									placeholder="Departamento" th:field="*{localizacao}" /> <datalist
+										id="locs">
+										<option th:each="localizacao : ${localizacoes}"
+											th:text="${localizacao.nome}" th:value="${localizacao.id}" />
+									</datalist></td>
+							</tr>
+							<tr>
+								<td>Observação</td>
+								<td><input type="text" class="form-control"
+									placeholder="Observação" th:field="*{observacao}" /></td>
+							</tr>
+
+							<tr>
+								<td>Usuário</td>
+								<td><input type="text" class="form-control"
+									placeholder="Usuario" th:field="*{usuario}" /></td>
+							</tr>
+						</table>
+
+						<button type="submit" class="btn btn-primary">Adicionar</button>
+
+					</div>
+				</form>
+
+				<table class="table" border="1">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Patrimonio</th>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Número de Série</th>
+							<th>Departamento</th>
+
+							<th>Observação</th>
+							<th>Atualizado Em</th>
+
+							<th>Usuário</th>
+
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="switcher : ${switchs}">
+							<td th:text="${switcher.id}"></td>
+							<td th:text="${switcher.patrimonio}"></td>
+							<td th:text="${switcher.marca}"></td>
+							<td th:text="${switcher.modelo}"></td>
+							<td th:text="${switcher.numeroDeSerie}"></td>
+							<td th:text="${switcher.localizacao}"></td>
+
+							<td th:text="${switcher.observacao}"></td>
+							<td th:date="${switcher.atualizadoEm}"></td>
+
+							<td th:text="${switcher.usuario}"></td>
+
+							<td><a th:href="@{'/switchs/populaForm'(id=${switcher.id})}">editar</a></td>
+							<td><a th:href="@{'/switchs/remove'(id=${switcher.id})}">remover</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="rodape :: rodape">...</div>
+
+</body>
+</html>

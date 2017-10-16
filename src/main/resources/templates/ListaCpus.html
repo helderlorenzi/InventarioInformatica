@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Cpus</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+<style>
+div.panel-body {
+	overflow: auto;
+	white-space: nowrap;
+}
+
+div.panel-body td {
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+		<div class="panel panel-default" style="margin: 10px">
+
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de cpus</h1>
+			</div>
+
+
+
+			<div class="panel-body">
+
+				<form class="form-inline" method="POST" th:object="${cpu}"
+					th:action="@{/cpus}" style="margin: 20px 0">
+					<div class="form-group">
+
+						<table class="scrollmenu">
+							<tr>
+								<td>Patrimônio</td>
+								<td><input type="text" class="form-control"
+									placeholder="Patrimonio" th:field="*{patrimonio}" /></td>
+							</tr>
+
+							<tr>
+								<td><a th:href="@{'/marcas'}">Marca</a></td>
+								<td><input type="text" list="marcs" class="form-control"
+									placeholder="Marca" th:field="*{marca}" /> <datalist
+										id="marcs">
+										<option th:each="marca : ${marcas}" th:text="${marca.nome}"
+											th:value="${marca.id}" />
+									</datalist></td>
+							</tr>
+
+							<tr>
+								<td><a th:href="@{'/modelos'}">Modelo</a></td>
+								<td><input type="text" list="mods" class="form-control"
+									placeholder="Modelo" th:field="*{modelo}" /> <datalist
+										id="mods">
+										<option th:each="modelo : ${modelos}" th:text="${modelo.nome}"
+											th:value="${modelo.id}" />
+									</datalist></td>
+							</tr>
+
+							<tr>
+								<td>Número de Série</td>
+								<td><input type="text" class="form-control"
+									placeholder="Número de Série" th:field="*{numeroDeSerie}" /></td>
+							</tr>
+							<tr>
+								<td><a th:href="@{'/departamentos'}">Departamento</a></td>
+								<td><input type="text" list="locs" class="form-control"
+									placeholder="Departamento" th:field="*{localizacao}" /> <datalist
+										id="locs">
+										<option th:each="localizacao : ${localizacoes}"
+											th:text="${localizacao.nome}" th:value="${localizacao.id}" />
+									</datalist></td>
+							</tr>
+							<tr>
+								<td>Observação</td>
+								<td><input type="text" class="form-control"
+									placeholder="Observação" th:field="*{observacao}" /></td>
+							</tr>
+
+							<tr>
+								<td>Usuário</td>
+								<td><input type="text" class="form-control"
+									placeholder="Usuario" th:field="*{usuario}" /></td>
+							</tr>
+							<tr>
+								<td>Nome</td>
+								<td><input type="text" class="form-control"
+									placeholder="Nome" th:field="*{nome}" /></td>
+							</tr>
+							<tr>
+								<td>Contrato</td>
+								<td><input type="text" class="form-control"
+									placeholder="Contrato" th:field="*{contrato}" /></td>
+							</tr>
+							<tr>
+								<td>Última Limpeza</td>
+								<td><input type="date" class="form-control"
+									placeholder="Última Limpeza" th:field="*{ultimaLimpeza}" /></td>
+							</tr>
+							<tr>
+								<td>Última Formatação</td>
+								<td><input type="date" class="form-control"
+									placeholder="Última Formatação" th:field="*{ultimaFormatacao}" /></td>
+							</tr>
+							<tr>
+								<td>Última Troca Bateria</td>
+								<td><input type="date" class="form-control"
+									placeholder="Última Troca de Bateria"
+									th:field="*{ultimaTrocaBateria}" /></td>
+							</tr>
+						</table>
+
+						<button type="submit" class="btn btn-primary">Adicionar</button>
+
+					</div>
+				</form>
+
+				<table class="table" border="1">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Patrimonio</th>
+							<th>Marca</th>
+							<th>Modelo</th>
+							<th>Número de Série</th>
+							<th>Departamento</th>
+
+							<th>Observação</th>
+							<th>Atualizado Em</th>
+
+							<th>Usuário</th>
+							<th>Nome</th>
+							<th>Contrato</th>
+							<th>Última Limpeza</th>
+							<th>Última Formatação</th>
+							<th>Última Troca Bateria</th>
+							<th></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cpu : ${cpus}">
+							<td th:text="${cpu.id}"></td>
+							<td th:text="${cpu.patrimonio}"></td>
+							<td th:text="${cpu.marca}"></td>
+							<td th:text="${cpu.modelo}"></td>
+							<td th:text="${cpu.numeroDeSerie}"></td>
+							<td th:text="${cpu.localizacao}"></td>
+
+							<td th:text="${cpu.observacao}"></td>
+							<td th:date="${cpu.atualizadoEm}"></td>
+
+							<td th:text="${cpu.usuario}"></td>
+							<td th:text="${cpu.nome}"></td>
+							<td th:text="${cpu.contrato}"></td>
+							<td th:date="${cpu.ultimaLimpeza}"></td>
+							<td th:date="${#dates.format(cpu.ultimaFormatacao,'dd-MM-yyyy')}"></td>
+							<td
+								th:date="${#dates.format(cpu.ultimaTrocaBateria,'dd-MM-yyyy')}"></td>
+							<td><a th:href="@{'/cpus/populaForm'(id=${cpu.id})}">editar</a></td>
+							<td><a th:href="@{'/cpus/remove'(id=${cpu.id})}">remover</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+	</div>
+
+	<div th:replace="rodape :: rodape">...</div>
+</body>
+</html>

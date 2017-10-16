@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Equipamentos</title>
+
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+		<div class="panel panel-default" style="margin: 10px">
+
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de equipamentos</h1>
+			</div>
+
+
+
+			<div class="panel-body">
+
+				<form class="form-inline" method="POST" th:object="${equipamento}"
+					th:action="@{/equipamentos}" style="margin: 20px 0">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Nome"
+							th:field="*{nome}" /> <input type="text" class="form-control"
+							placeholder="Quantidade" th:field="*{quantidade}" />
+						<button type="submit" class="btn btn-primary">Adicionar</button>
+					</div>
+				</form>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Quantidade</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="equipamento : ${equipamentos}">
+							<td th:text="${equipamento.nome}"></td>
+							<td th:text="${equipamento.quantidade}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="rodape :: rodape">...</div>
+
+</body>
+</html>

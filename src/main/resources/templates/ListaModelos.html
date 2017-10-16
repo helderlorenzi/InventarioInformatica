@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Modelos</title>
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+<style>
+div.panel-body {
+	overflow: auto;
+	white-space: nowrap;
+}
+
+div.panel-body td {
+	text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+	
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+		<div class="panel panel-default" style="margin: 10px">
+
+			<div class="panel-heading">
+				<h1 class="panel-title">Lista de Modelos</h1>
+			</div>
+
+
+
+			<div class="panel-body">
+
+				<form class="form-inline" method="POST" th:object="${modelo}"
+					th:action="@{/modelos}" style="margin: 20px 0">
+					<div class="form-group">
+
+						<input type="text" class="form-control" placeholder="Nome"
+							th:field="*{nome}" />
+
+						<button type="submit" class="btn btn-primary">Adicionar</button>
+					</div>
+				</form>
+
+				<table class="table" border="1">
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="modelo : ${modelos}">
+							<td th:text="${modelo.nome}"></td>
+							<td><a th:href="@{'/modelos/populaForm'(id=${modelo.id})}">editar</a></td>
+							<!-- 16/09/17 15:35 - Tag desativada porque a remoção de um local afeta todos os equipamentos cadastrados no banco.
+						<td><a
+							th:href="@{'/localizacoes/remove'(id=${localizacao.id})}">remover</a></td>
+						-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div th:replace="rodape :: rodape">...</div>
+
+</body>
+</html>

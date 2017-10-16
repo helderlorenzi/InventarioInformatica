@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Editar Cpu</title>
+
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+
+</head>
+
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+
+		<div class="panel panel-default" style="margin: 10px">
+
+			<div class="panel-heading">
+				<h1 class="panel-title">Editar Cpu</h1>
+			</div>
+
+			<div class="panel-body">
+
+				<form class="form-inline" method="POST" th:object="${cpuAntigo}"
+					th:action="@{/cpus/atualizar}" style="margin: 20px 0">
+					<div class="form-group">
+
+						<table class="scrollmenu">
+							<tr>
+								<td>Id</td>
+								<td><input readonly th:type="text" class="form-control"
+									placeholder="Id" th:field="*{id}" /></td>
+							</tr>
+							<tr>
+								<td>Patrimônio</td>
+								<td><input type="text" class="form-control"
+									placeholder="Patrimonio" th:field="*{patrimonio}" /></td>
+							</tr>
+
+							<tr>
+								<td><a th:href="@{'/marcas'}">Marca</a></td>
+								<td><input type="text" th:list="marcs" class="form-control"
+									placeholder="Marca" th:field="*{marca}" /> <datalist
+										th:id="marcs">
+										<option th:each="marca : ${marcas}" th:text="${marca.nome}"
+											th:value="${marca.id}" />
+									</datalist></td>
+							</tr>
+
+							<tr>
+								<td><a th:href="@{'/modelos'}">Modelo</a></td>
+								<td><input type="text" th:list="mods" class="form-control"
+									placeholder="Modelo" th:field="*{modelo}" /> <datalist
+										th:id="mods">
+										<option th:each="modelo : ${modelos}" th:text="${modelo.nome}"
+											th:value="${modelo.id}" />
+									</datalist></td>
+							</tr>
+
+							<tr>
+								<td>Número de Série</td>
+								<td><input type="text" class="form-control"
+									placeholder="Número de Série" th:field="*{numeroDeSerie}" /></td>
+							</tr>
+							<tr>
+								<td><a th:href="@{'/departamentos'}">Departamento</a></td>
+								<td><input type="text" th:list="locs" class="form-control"
+									placeholder="Localizacao" th:field="*{localizacao}" /> <datalist
+										th:id="locs">
+										<option th:each="localizacao : ${localizacoes}"
+											th:text="${localizacao.nome}" th:value="${localizacao.id}" />
+									</datalist></td>
+							</tr>
+							<tr>
+								<td>Observação</td>
+								<td><input type="text" class="form-control"
+									placeholder="Observação" th:field="*{observacao}" /></td>
+							</tr>
+
+							<tr>
+								<td>Usuário</td>
+								<td><input type="text" class="form-control"
+									placeholder="Usuario" th:field="*{usuario}" /></td>
+							</tr>
+							<tr>
+								<td>Nome</td>
+								<td><input type="text" class="form-control"
+									placeholder="Nome" th:field="*{nome}" /></td>
+							</tr>
+							<tr>
+								<td>Contrato</td>
+								<td><input type="text" class="form-control"
+									placeholder="Contrato" th:field="*{contrato}" /></td>
+							</tr>
+							<tr>
+								<td>Última Limpeza</td>
+								<td><input type="date" class="form-control"
+									placeholder="Última Limpeza" th:field="*{ultimaLimpeza}" /></td>
+							</tr>
+							<tr>
+								<td>Última Formatação</td>
+								<td><input type="date" class="form-control"
+									placeholder="Última Formatação" th:field="*{ultimaFormatacao}" /></td>
+							</tr>
+							<tr>
+								<td>Última Troca de Bateria</td>
+								<td><input type="date" class="form-control"
+									placeholder="Última Troca de Bateria"
+									th:field="*{ultimaTrocaBateria}" /></td>
+							</tr>
+						</table>
+
+						<button type="submit" class="btn btn-primary">Atualizar</button>
+						<a th:href="@{/cpus}"> Cancelar </a>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div th:replace="rodape :: rodape">...</div>
+
+</body>
+</html>

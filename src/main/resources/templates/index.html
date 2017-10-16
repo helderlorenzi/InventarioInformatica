@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Inventario Fatec</title>
+
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+
+		<div>
+			<a th:href="@{'/departamentos'}">Departamentos</a>
+		</div>
+		<div>
+			<a th:href="@{'/cpus'}">Cpus</a>
+		</div>
+		<div>
+			<a th:href="@{'/datashows'}">DataShows</a>
+		</div>
+		<div>
+			<a th:href="@{'/estabilizadores'}">Estabilizadores</a>
+		</div>
+		<div>
+			<a th:href="@{'/impressoras'}">Impressoras</a>
+		</div>
+		<div>
+			<a th:href="@{'/modems'}">Modens</a>
+		</div>
+		<div>
+			<a th:href="@{'/monitores'}">Monitores</a>
+		</div>
+		<div>
+			<a th:href="@{'/nobreaks'}">NoBreaks</a>
+		</div>
+		<div>
+			<a th:href="@{'/notebooks'}">Notebooks</a>
+		</div>
+		<div>
+			<a th:href="@{'/roteadores'}">Roteadores</a>
+		</div>
+		<div>
+			<a th:href="@{'roteadoresApWifi'}">Roteadores Wifi</a>
+		</div>
+		<div>
+			<a th:href="@{'/servidores'}">Servidores</a>
+		</div>
+		<div>
+			<a th:href="@{'/switchs'}">Switchs</a>
+		</div>
+
+
+
+	</div>
+	
+
+	<div th:replace="rodape :: rodape">...</div>
+	
+</body>
+</html>

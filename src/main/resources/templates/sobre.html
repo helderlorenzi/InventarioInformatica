@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Sobre</title>
+
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+
+</head>
+<body>
+
+	<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+	<script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<div th:replace="cabecalho :: cabecalho">...</div>
+
+	<div id="main" class="container-fluid">
+
+		<h3 class="page-header"></h3>
+
+		<div class="panel panel-default" style="margin: 10px">
+			<div class="panel-heading">
+				<h1 class="panel-title">O Inventário Web de Equipamentos de
+					Informática para Fatec São José dos Campos tem por finalidade
+					prover um meio de registrar, consultar e monitorar, de maneira
+					simples, a situação dos patrimônios de responsabilidade da equipe
+					de informática da faculdade de tecnologia Jessen Vidal.</h1>
+			</div>
+			<div class="panel-heading">
+				<h1 class="panel-title">Destina-se também à produção de um
+					Trabalho de Graduação apresentado à Faculdade de Tecnologia de São
+					José dos Campos, como parte dos requisitos necessários para a
+					obtenção do título de Tecnólogo em Banco de Dados.</h1>
+			</div>
+			<div class="panel-heading">
+				<h1 class="panel-title">O orientador deste trabalho é o
+					professor MSc. Ronaldo Emerick Moreira.</h1>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+</html>
